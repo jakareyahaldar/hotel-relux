@@ -6,3 +6,11 @@ dist/
 .DS_Store
 .vscode/
 .idea/
+
+# Local debug / probe / audit artifacts
+/*.txt
+/*.ps1
+/scripts/_probe-*.mjs
+/scripts/css-audit.mjs
+/scripts/css-structure.mjs
+/scripts/css-validate.mjs
