@@ -1,0 +1,26 @@
+{
+  "name": "aurelia-hotel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Aurelia Hotel & Suites - a complete React website for a 13-room boutique hotel with room booking, WhatsApp and phone call integration.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test src/utils/booking.test.js",
+    "test:render": "node scripts/render-test.mjs",
+    "test:all": "npm test && npm run test:render"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
