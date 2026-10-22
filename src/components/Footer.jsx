@@ -38,7 +38,6 @@ export default function Footer({ onBook }) {
               <a href="#rooms">ডিলাক্স রুম</a>
               <a href="#rooms">রিল্যাক্স সুইট</a>
               <a href="#booking">রুম বুক করুন</a>
-              <a href="#manage">আমার বুকিং</a>
             </div>
           </div>
 

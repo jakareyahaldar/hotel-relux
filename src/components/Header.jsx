@@ -9,7 +9,6 @@ const NAV_LINKS = [
   { href: '#amenities', label: 'সুবিধা' },
   { href: '#reviews', label: 'প্রশংসা' },
   { href: '#faq', label: 'প্রশ্নোত্তর' },
-  { href: '#manage', label: 'আমার বুকিং' },
   { href: '#contact', label: 'যোগাযোগ' },
 ];
 
