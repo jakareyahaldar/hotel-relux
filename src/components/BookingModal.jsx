@@ -139,7 +139,7 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
       );
       setBooking(created);
       setStep('confirmed');
-      onToast?.(`বুকিং ${created.reference} তৈরি হয়েছে`);
+      onToast?.('বুকিং তৈরি হয়েছে');
     } catch (error) {
       setSubmitError(error.message);
     }
@@ -164,7 +164,7 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
             <p className="modal__subtitle">
               {step === 'form'
                 ? `${selectedRoom.name} · ${humanDate(checkIn)} → ${humanDate(effectiveCheckOut)}`
-                : `রেফারেন্স ${booking?.reference}`}
+                : 'বুকিং নিশ্চিত হয়েছে'}
             </p>
           </div>
           <button type="button" className="modal__close" onClick={onClose} aria-label="বন্ধ করুন">

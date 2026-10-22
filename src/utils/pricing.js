@@ -59,10 +59,9 @@ export function buildBookingMessage(booking, intent = 'confirm') {
 
   const lines = [
     isAmend
-      ? `আসসালামু আলাইকুম ${HOTEL.shortName}, ${booking.reference} রেফারেন্সের বুকিংটি পরিবর্তন করতে চাই।`
+      ? `আসসালামু আলাইকুম ${HOTEL.shortName}, আমার বুকিংটি পরিবর্তন করতে চাই।`
       : `আসসালামু আলাইকুম ${HOTEL.shortName}, আমি একটি বুকিং নিশ্চিত করতে চাই।`,
     '',
-    `বুকিং রেফারেন্স: ${booking.reference}`,
     `রুমের ধরন: ${room?.name || booking.roomName}`,
     `চেক-ইন: ${humanDate(booking.checkIn)}, ${HOTEL.checkInTime} থেকে`,
     `চেক-আউট: ${humanDate(booking.checkOut)}, ${HOTEL.checkOutTime} পর্যন্ত`,

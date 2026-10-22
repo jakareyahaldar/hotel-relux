@@ -316,9 +316,6 @@ const BOOKING_STEPS = [
     })()`,
     settle: 900,
   },
-  {
-    name: 'booking confirmation shows a reference',
-    expression: `/^AUR-[A-Z0-9]{6}$/.test((document.querySelector('.reference__value')?.textContent || '').trim())`,
   },
   {
     name: 'confirmation WhatsApp link carries the booking message',

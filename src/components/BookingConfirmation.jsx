@@ -31,12 +31,7 @@ export default function BookingConfirmation({
             ফ্রন্ট ডেস্ক চব্বিশ ঘণ্টা সচল।
           </p>
 
-          <div className="reference">
-            <span className="reference__label">বুকিং রেফারেন্স</span>
-            <span className="reference__value">{booking.reference}</span>
-          </div>
-
-          <div className="confirm-actions">
+           <div className="confirm-actions">
             <a
               href={booking.whatsappLink}
               className="btn btn--whatsapp btn--lg"

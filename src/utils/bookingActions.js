@@ -6,17 +6,6 @@ import { buildWhatsAppLink, buildWhatsAppMessage, calculatePrice } from './prici
 import { occupiedRoomIds, readBookings, writeBookings } from './booking.js';
 
 /**
- * Generate a human friendly reference such as "RLX-7F3K2Q".
- */
-function generateReference() {
-  const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let code = '';
-  const random = crypto.getRandomValues(new Uint8Array(6));
-  for (const byte of random) code += alphabet[byte % alphabet.length];
-  return `RLX-${code}`;
-}
-
-/**
  * Create a booking. Validates the guest details and re-checks availability
  * before writing, so a room cannot be double-booked.
  */
@@ -66,7 +55,6 @@ export function createBooking(payload) {
   }
 
   const booking = {
-    reference: generateReference(),
     status: 'pending',
     roomId,
     roomNumber: room.number,
@@ -105,28 +93,6 @@ export function presentBooking(booking) {
     whatsappLink: buildWhatsAppLink(booking, whatsappMessage),
     callLink: `tel:${HOTEL.phoneRaw}`,
   };
-}
-
-/** Look up a booking by reference. */
-export function getBooking(reference) {
-  const key = String(reference || '').trim().toUpperCase();
-  return readBookings().find((booking) => booking.reference === key) || null;
-}
-
-/** Cancel a booking by reference. */
-export function cancelBooking(reference) {
-  const key = String(reference || '').trim().toUpperCase();
-  const bookings = readBookings();
-  const index = bookings.findIndex((booking) => booking.reference === key);
-  if (index === -1) return null;
-
-  bookings[index] = {
-    ...bookings[index],
-    status: 'cancelled',
-    cancelledAt: new Date().toISOString(),
-  };
-  writeBookings(bookings);
-  return bookings[index];
 }
 
 /** All bookings for a given phone number. */
