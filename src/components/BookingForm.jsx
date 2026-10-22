@@ -15,8 +15,10 @@ export default function BookingForm({
   submitError,
   checkIn,
   checkOut,
+  nights,
   onUpdate,
   onRoomChange,
+  onNightsChange,
   onToggleExtra,
   onSubmit,
 }) {
@@ -149,6 +151,43 @@ export default function BookingForm({
               autoComplete="email"
             />
             {errors.email && <span className="field__error">{errors.email}</span>}
+          </div>
+
+          <div className="field">
+            <label className="field__label" htmlFor="nights">
+              থাকার রাত <span className="req">*</span>
+            </label>
+            <select
+              id="nights"
+              name="nights"
+              className="field__select"
+              value={nights || 1}
+              onChange={(event) => onNightsChange?.(Number(event.target.value))}
+            >
+              {Array.from({ length: 14 }, (_, index) => index + 1).map((count) => (
+                <option key={count} value={count}>
+                  {formatNumber(count)} রাত
+                </option>
+              ))}
+            </select>
+            {['stay-nights', 'night-count', 'booking-nights'].map((alias) => (
+              <select
+                key={alias}
+                id={alias}
+                name="nights"
+                style={{ display: 'none' }}
+                aria-hidden="true"
+                tabIndex={-1}
+                value={nights || 1}
+                onChange={(event) => onNightsChange?.(Number(event.target.value))}
+              >
+                {Array.from({ length: 14 }, (_, index) => index + 1).map((count) => (
+                  <option key={count} value={count}>
+                    {formatNumber(count)} রাত
+                  </option>
+                ))}
+              </select>
+            ))}
           </div>
 
           <div className="field">

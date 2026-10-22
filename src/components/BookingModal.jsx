@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { calculatePrice } from '../utils/pricing.js';
 import { createBooking, presentBooking } from '../utils/bookingActions.js';
-import { humanDate } from '../utils/dates.js';
+import { addDays, humanDate, nightsBetween } from '../utils/dates.js';
 import { formatNumber } from '../utils/format.js';
 import { getAvailability } from '../utils/booking.js';
 import { IconClose } from './icons.jsx';
@@ -24,12 +24,19 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
   const [booking, setBooking] = useState(null);
   const [submitError, setSubmitError] = useState('');
   const [selectedRoomId, setSelectedRoomId] = useState(room?.id);
+  const [stayNights, setStayNights] = useState(Math.max(1, nightsBetween(checkIn, checkOut) || 1));
+
+  useEffect(() => {
+    setStayNights(Math.max(1, nightsBetween(checkIn, checkOut) || 1));
+  }, [checkIn, checkOut]);
+
+  const effectiveCheckOut = addDays(checkIn, Math.max(1, stayNights || 1));
 
   const availableRooms = useMemo(() => {
-    const free = getAvailability(checkIn, checkOut).filter((item) => item.available);
+    const free = getAvailability(checkIn, effectiveCheckOut).filter((item) => item.available);
     if (free.length === 0) return room ? [room] : [];
     return free;
-  }, [checkIn, checkOut, room]);
+  }, [checkIn, effectiveCheckOut, room]);
 
   useEffect(() => {
     if (!availableRooms.some((item) => item.id === selectedRoomId)) {
@@ -69,8 +76,8 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
 
   const price = useMemo(() => {
     if (!selectedRoom) return null;
-    return calculatePrice({ roomId: selectedRoom.id, checkIn, checkOut, extras });
-  }, [selectedRoom, checkIn, checkOut, extras]);
+    return calculatePrice({ roomId: selectedRoom.id, checkIn, checkOut: effectiveCheckOut, extras });
+  }, [selectedRoom, checkIn, effectiveCheckOut, extras]);
 
   if (!selectedRoom || !price) return null;
 
@@ -124,7 +131,7 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
         createBooking({
           roomId: selectedRoom.id,
           checkIn,
-          checkOut,
+          checkOut: effectiveCheckOut,
           guest: form,
           extras,
           specialRequests: form.specialRequests,
@@ -156,7 +163,7 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
             </h3>
             <p className="modal__subtitle">
               {step === 'form'
-                ? `${selectedRoom.name} · ${humanDate(checkIn)} → ${humanDate(checkOut)}`
+                ? `${selectedRoom.name} · ${humanDate(checkIn)} → ${humanDate(effectiveCheckOut)}`
                 : `রেফারেন্স ${booking?.reference}`}
             </p>
           </div>
@@ -175,7 +182,9 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
             extras={extras}
             submitError={submitError}
             checkIn={checkIn}
-            checkOut={checkOut}
+            checkOut={effectiveCheckOut}
+            nights={stayNights}
+            onNightsChange={setStayNights}
             onUpdate={update}
             onRoomChange={handleRoomChange}
             onToggleExtra={toggleExtra}
@@ -186,7 +195,7 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
             booking={booking}
             message={booking?.whatsappMessage}
             checkIn={checkIn}
-            checkOut={checkOut}
+            checkOut={effectiveCheckOut}
             onClose={onClose}
           />
         )}
