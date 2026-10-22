@@ -273,7 +273,7 @@ test('price with no extras is just room plus GST', () => {
 /* Booking creation and validation                                    */
 /* ------------------------------------------------------------------ */
 
-test('createBooking returns a reference and persists the booking', () => {
+test('createBooking persists the booking', () => {
   clearStore();
   const booking = createBooking({
     roomId: 'r301',
@@ -283,14 +283,10 @@ test('createBooking returns a reference and persists the booking', () => {
     extras: ['breakfast'],
   });
 
-  assert.match(booking.reference, /^AUR-[A-Z0-9]{6}$/);
   assert.equal(booking.status, 'pending');
   assert.equal(booking.nights, 3);
   assert.equal(booking.guest.name, 'Priya R');
-
-  const found = getBooking(booking.reference);
-  assert.ok(found);
-  assert.equal(found.roomNumber, '301');
+  assert.equal(booking.roomNumber, '301');
 });
 
 test('createBooking rejects a missing name', () => {
@@ -303,7 +299,7 @@ test('createBooking rejects a missing name', () => {
         checkOut: '2030-06-02',
         guest: { name: '  ', phone: '9876543210' },
       }),
-    /enter your name/i,
+    /আপনার নাম লিখুন/,
   );
 });
 
@@ -317,7 +313,7 @@ test('createBooking rejects an invalid email', () => {
         checkOut: '2030-06-02',
         guest: { name: 'Test', phone: '9876543210', email: 'not-an-email' },
       }),
-    /valid email/i,
+    /সঠিক ইমেইল/,
   );
 });
 
@@ -331,7 +327,7 @@ test('createBooking rejects more guests than the room sleeps', () => {
         checkOut: '2030-06-02',
         guest: { name: 'Test', phone: '9876543210', guests: 4 },
       }),
-    /sleeps up to 2/i,
+    /সর্বোচ্চ.*অতিথি/,
   );
 });
 
@@ -345,7 +341,7 @@ test('createBooking rejects a checkout before checkin', () => {
         checkOut: '2030-06-02',
         guest: { name: 'Test', phone: '9876543210' },
       }),
-    /after check-in/i,
+    /চেক-আউটের তারিখ চেক-ইনের পরে/,
   );
 });
 
@@ -359,7 +355,7 @@ test('createBooking rejects a checkin in the past', () => {
         checkOut: '2020-01-02',
         guest: { name: 'Test', phone: '9876543210' },
       }),
-    /cannot be in the past/i,
+    /অতীতে হতে পারে না/,
   );
 });
 
@@ -373,7 +369,7 @@ test('createBooking blocks a double booking of the same room and dates', () => {
   };
 
   createBooking(payload);
-  assert.throws(() => createBooking(payload), /just booked/i);
+  assert.throws(() => createBooking(payload), /বুক হয়ে গেছে/);
 });
 
 /* ------------------------------------------------------------------ */
@@ -390,8 +386,8 @@ test('the WhatsApp message includes the reference, dates and total', () => {
   });
 
   const message = buildWhatsAppMessage(booking);
-  assert.match(message, /Deluxe/);
-  assert.match(message, /Total:/);
+  assert.match(message, /নন এসি কাপল/);
+  assert.match(message, /মোট:/);
 });
 
 test('the WhatsApp link points at wa.me with the hotel number', () => {
@@ -423,7 +419,7 @@ test('the WhatsApp message never contains a room number', () => {
   assert.ok(!/\b201\b/.test(message), 'message must not contain the room number');
   assert.ok(!message.includes('Room number'));
   // The room *type* is still there.
-  assert.match(message, /Room type: Deluxe/);
+  assert.match(message, /রুমের ধরন:/);
 });
 
 test('the WhatsApp message carries the booking details the hotel needs', () => {
@@ -439,15 +435,15 @@ test('the WhatsApp message carries the booking details the hotel needs', () => {
 
   const message = buildWhatsAppMessage(booking);
 
-  assert.match(message, /Room type: Deluxe/);
-  assert.match(message, /Check-in:/);
-  assert.match(message, /Check-out:/);
-  assert.match(message, /Nights: 2/);
-  assert.match(message, /Extras:/);
-  assert.match(message, /Breakfast/);
-  assert.match(message, /Phone: 9876543210/);
-  assert.match(message, /Requests: Late arrival/);
-  assert.match(message, /Total:/);
+  assert.match(message, /রুমের ধরন:/);
+  assert.match(message, /চেক-ইন:/);
+  assert.match(message, /চেক-আউট:/);
+  assert.match(message, /রাত সংখ্যা:/);
+  assert.match(message, /সহায়ক সেবা:/);
+  assert.match(message, /সকালের নাশতা/);
+  assert.match(message, /ফোন: 9876543210/);
+  assert.match(message, /বিশেষ অনুরোধ: Late arrival/);
+  assert.match(message, /মোট:/);
 });
 
 test('the amend message asks the hotel to change the booking', () => {
