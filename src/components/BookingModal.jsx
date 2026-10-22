@@ -151,9 +151,6 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
       role="dialog"
       aria-modal="true"
       aria-label={step === 'form' ? 'রুম বুক করুন' : 'বুকিং নিশ্চিত হয়েছে'}
-      onClick={(event) => {
-        if (event.target === event.currentTarget) onClose();
-      }}
     >
       <div className="modal">
         <div className="modal__head">
