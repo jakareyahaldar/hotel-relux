@@ -113,6 +113,11 @@ export const ROOMS_WITH_DETAILS = ROOMS.map((room) => ({
 
 export const TOTAL_ROOMS = ROOMS.length;
 
+/** Look up a single room's full details by id (single source of truth). */
+export function getRoomById(id) {
+  return ROOMS_WITH_DETAILS.find((room) => room.id === id) || null;
+}
+
 
 /** Add-ons a guest can bolt onto a stay. (সহায়ক সেবা) */
 export const EXTRA_SERVICES = [

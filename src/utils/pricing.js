@@ -1,5 +1,5 @@
 import { HOTEL } from '../data/hotel.js';
-import { EXTRA_SERVICES, ROOMS_WITH_DETAILS } from '../data/rooms.js';
+import { EXTRA_SERVICES, getRoomById } from '../data/rooms.js';
 import { humanDate, nightsBetween } from './dates.js';
 import { formatNumber } from './format.js';
 
@@ -8,7 +8,7 @@ import { formatNumber } from './format.js';
  * Extras flagged `perNight` are charged for each night, others are one-off.
  */
 export function calculatePrice({ roomId, checkIn, checkOut, extras = [] }) {
-  const room = ROOMS_WITH_DETAILS.find((r) => r.id === roomId);
+  const room = getRoomById(roomId);
   if (!room) throw new Error('Unknown room');
 
   const nights = Math.max(1, nightsBetween(checkIn, checkOut));
@@ -54,7 +54,7 @@ export function calculatePrice({ roomId, checkIn, checkOut, extras = [] }) {
  * @param {'confirm'|'amend'} intent  What the guest wants the hotel to do.
  */
 export function buildBookingMessage(booking, intent = 'confirm') {
-  const room = ROOMS_WITH_DETAILS.find((r) => r.id === booking.roomId);
+  const room = getRoomById(booking.roomId);
   const isAmend = intent === 'amend';
 
   const lines = [

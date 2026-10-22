@@ -1,5 +1,5 @@
 import { HOTEL } from '../data/hotel.js';
-import { ROOMS_WITH_DETAILS } from '../data/rooms.js';
+import { getRoomById } from '../data/rooms.js';
 import { nightsBetween, today } from './dates.js';
 import { formatNumber } from './format.js';
 import { buildWhatsAppLink, buildWhatsAppMessage, calculatePrice } from './pricing.js';
@@ -31,7 +31,7 @@ export function createBooking(payload) {
   } = payload;
 
   if (!roomId) throw new Error('অনুগ্রহ করে একটি রুম নির্বাচন করুন।');
-  const room = ROOMS_WITH_DETAILS.find((r) => r.id === roomId);
+  const room = getRoomById(roomId);
   if (!room) throw new Error('এই রুমটি পাওয়া যায়নি।');
 
   if (!checkIn || !checkOut) throw new Error('চেক-ইন ও চেক-আউটের তারিখ দিতে হবে।');
