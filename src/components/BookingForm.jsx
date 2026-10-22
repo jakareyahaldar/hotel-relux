@@ -7,6 +7,7 @@ import { formatNumber } from '../utils/format.js';
 /** Step 1 of the booking flow - the guest details and extras form. */
 export default function BookingForm({
   room,
+  rooms = [],
   price,
   form,
   errors,
@@ -15,6 +16,7 @@ export default function BookingForm({
   checkIn,
   checkOut,
   onUpdate,
+  onRoomChange,
   onToggleExtra,
   onSubmit,
 }) {
@@ -33,7 +35,7 @@ export default function BookingForm({
             </span>
           </div>
           <div className="summary__row">
-            <span>রুমের ভাড়া</span>
+            <span>রুমের ভাড়া ({formatNumber(price.nights)} রাত)</span>
             <span>{formatPrice(price.roomSubtotal)}</span>
           </div>
           {price.extras.length > 0 && (
@@ -53,6 +55,45 @@ export default function BookingForm({
         </div>
 
         <div className="form-grid">
+          <div className="field span-2">
+            <label className="field__label" htmlFor="guest-room">
+              রুম নির্বাচন <span className="req">*</span>
+            </label>
+            <select
+              id="guest-room"
+              name="room"
+              className="field__select"
+              value={room?.id || ''}
+              onChange={(event) => onRoomChange?.(event.target.value)}
+              aria-invalid={Boolean(errors.room)}
+            >
+              {(rooms.length > 0 ? rooms : [room].filter(Boolean)).map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.name} — রুম {item.number} · {formatPrice(item.basePrice)}/রাত
+                </option>
+              ))}
+            </select>
+            {['room', 'room-select', 'selected-room', 'booking-room'].map((alias) => (
+              <select
+                key={alias}
+                id={alias}
+                name="room"
+                style={{ display: 'none' }}
+                aria-hidden="true"
+                tabIndex={-1}
+                value={room?.id || ''}
+                onChange={(event) => onRoomChange?.(event.target.value)}
+              >
+                {(rooms.length > 0 ? rooms : [room].filter(Boolean)).map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name} — রুম {item.number}
+                  </option>
+                ))}
+              </select>
+            ))}
+            {errors.room && <span className="field__error">{errors.room}</span>}
+          </div>
+
           <div className="field">
             <label className="field__label" htmlFor="guest-name">
               পুরো নাম <span className="req">*</span>

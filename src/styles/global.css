@@ -717,11 +717,7 @@ ul {
 /* --- Booking modal -------------------------------------------------------- */
 
 .modal-backdrop {
-  background-color: #1fbe5a;
-  height: 100dvh;
-  /* width: 100dvw; */
-  left: 0;
-  position: sticky;
+  position: fixed;
   inset: 0;
   z-index: 200;
   background: rgba(9, 32, 29, 0.72);
@@ -730,7 +726,7 @@ ul {
   align-items: flex-start;
   justify-content: center;
   padding: 40px 20px;
-  /* overflow-y: auto; */
+  overflow-y: auto;
   animation: fadeIn 0.2s ease;
 }
 .modal-backdrop2 {

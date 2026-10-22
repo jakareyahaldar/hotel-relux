@@ -3,6 +3,7 @@ import { calculatePrice } from '../utils/pricing.js';
 import { createBooking, presentBooking } from '../utils/bookingActions.js';
 import { humanDate } from '../utils/dates.js';
 import { formatNumber } from '../utils/format.js';
+import { getAvailability } from '../utils/booking.js';
 import { IconClose } from './icons.jsx';
 import BookingForm from './BookingForm.jsx';
 import BookingConfirmation from './BookingConfirmation.jsx';
@@ -15,12 +16,6 @@ const EMPTY_FORM = {
   specialRequests: '',
 };
 
-/**
- * The booking modal.
- *
- * Step 1 - collect the guest details and any extras.
- * Step 2 - show the confirmed booking with the WhatsApp and phone actions.
- */
 export default function BookingModal({ room, checkIn, checkOut, guests = 1, onClose, onToast }) {
   const [step, setStep] = useState('form');
   const [form, setForm] = useState(EMPTY_FORM);
@@ -28,22 +23,38 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
   const [errors, setErrors] = useState({});
   const [booking, setBooking] = useState(null);
   const [submitError, setSubmitError] = useState('');
+  const [selectedRoomId, setSelectedRoomId] = useState(room?.id);
 
-  // The party size the guest picked in the booking bar, capped at what the
-  // room can actually sleep.
-  const requestedGuests = Math.max(1, Math.min(Number(guests) || 1, room?.capacity || 1));
+  const availableRooms = useMemo(() => {
+    const free = getAvailability(checkIn, checkOut).filter((item) => item.available);
+    if (free.length === 0) return room ? [room] : [];
+    return free;
+  }, [checkIn, checkOut, room]);
 
-  // Reset whenever a new room is opened.
   useEffect(() => {
+    if (!availableRooms.some((item) => item.id === selectedRoomId)) {
+      setSelectedRoomId(availableRooms[0]?.id ?? room?.id);
+    }
+  }, [availableRooms, selectedRoomId, room]);
+
+  const selectedRoom = useMemo(
+    () => availableRooms.find((item) => item.id === selectedRoomId) || room || availableRooms[0],
+    [availableRooms, selectedRoomId, room],
+  );
+
+
+
+  useEffect(() => {
+    const initialGuests = Math.max(1, Math.min(Number(guests) || 1, room?.capacity || 1));
     setStep('form');
-    setForm({ ...EMPTY_FORM, guests: requestedGuests });
+    setForm({ ...EMPTY_FORM, guests: initialGuests });
     setExtras([]);
     setErrors({});
     setBooking(null);
     setSubmitError('');
-  }, [room?.id, requestedGuests]);
+    setSelectedRoomId(availableRooms.some((item) => item.id === room?.id) ? room?.id : (availableRooms[0]?.id ?? room?.id));
+  }, [room?.id, guests]);
 
-  // Lock the page behind the modal and support Escape to close.
   useEffect(() => {
     document.body.classList.add('no-scroll');
     const handleKey = (event) => {
@@ -57,16 +68,26 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
   }, [onClose]);
 
   const price = useMemo(() => {
-    if (!room) return null;
-    return calculatePrice({ roomId: room.id, checkIn, checkOut, extras });
-  }, [room, checkIn, checkOut, extras]);
+    if (!selectedRoom) return null;
+    return calculatePrice({ roomId: selectedRoom.id, checkIn, checkOut, extras });
+  }, [selectedRoom, checkIn, checkOut, extras]);
 
-  if (!room || !price) return null;
+  if (!selectedRoom || !price) return null;
 
   const update = (field) => (event) => {
     const value = event.target.name === 'guests' ? Number(event.target.value) : event.target.value;
     setForm((previous) => ({ ...previous, [field]: value }));
     setErrors((previous) => ({ ...previous, [field]: undefined }));
+  };
+
+  const handleRoomChange = (roomId) => {
+    const nextRoom = availableRooms.find((item) => item.id === roomId) || room;
+    setSelectedRoomId(roomId);
+    setForm((previous) => ({
+      ...previous,
+      guests: Math.max(1, Math.min(Number(previous.guests) || 1, nextRoom?.capacity || 1)),
+    }));
+    setErrors((previous) => ({ ...previous, guests: undefined }));
   };
 
   const toggleExtra = (id) => {
@@ -86,8 +107,8 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
     if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       next.email = 'ইমেইল ঠিকানাটি একবার দেখে নিন।';
     }
-    if (form.guests > room.capacity) {
-      next.guests = `${room.name} সর্বোচ্চ ${formatNumber(room.capacity)} জন অতিথির জন্য উপযুক্ত।`;
+    if (form.guests > selectedRoom.capacity) {
+      next.guests = `${selectedRoom.name} সর্বোচ্চ ${formatNumber(selectedRoom.capacity)} জন অতিথির জন্য উপযুক্ত।`;
     }
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -101,7 +122,7 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
     try {
       const created = presentBooking(
         createBooking({
-          roomId: room.id,
+          roomId: selectedRoom.id,
           checkIn,
           checkOut,
           guest: form,
@@ -135,7 +156,7 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
             </h3>
             <p className="modal__subtitle">
               {step === 'form'
-                ? `${room.name} · ${humanDate(checkIn)} → ${humanDate(checkOut)}`
+                ? `${selectedRoom.name} · ${humanDate(checkIn)} → ${humanDate(checkOut)}`
                 : `রেফারেন্স ${booking?.reference}`}
             </p>
           </div>
@@ -146,7 +167,8 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
 
         {step === 'form' ? (
           <BookingForm
-            room={room}
+            room={selectedRoom}
+            rooms={availableRooms}
             price={price}
             form={form}
             errors={errors}
@@ -155,6 +177,7 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
             checkIn={checkIn}
             checkOut={checkOut}
             onUpdate={update}
+            onRoomChange={handleRoomChange}
             onToggleExtra={toggleExtra}
             onSubmit={handleSubmit}
           />
