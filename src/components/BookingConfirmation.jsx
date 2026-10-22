@@ -102,11 +102,8 @@ export default function BookingConfirmation({
       </div>
 
       <div className="modal__foot">
-        <button type="button" className="btn btn--ghost btn--block" onClick={onClose}>
-          ঠিক আছে
-        </button>
         <p className="modal__foot-note">
-          রেফারেন্সটি সংরক্ষণ করুন — এটি দিয়ে বুকিং দেখা বা পরিবর্তন করা যাবে।
+          ফ্রন্ট ডেস্ক আপনার সাথে যোগাযোগ করবে — উপরের বাটন দিয়ে নিশ্চিত করুন।
         </p>
       </div>
     </>

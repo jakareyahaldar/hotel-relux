@@ -11,7 +11,6 @@ import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import FloatingActions from './components/FloatingActions.jsx';
 import BookingModal from './components/BookingModal.jsx';
-import ManageBooking from './components/ManageBooking.jsx';
 import Reveal from './components/Reveal.jsx';
 import { addDays, today } from './utils/dates.js';
 import { getBookableRooms } from './utils/booking.js';
@@ -137,9 +136,6 @@ export default function App() {
         </Reveal>
         <Reveal>
           <Faq />
-        </Reveal>
-        <Reveal>
-          <ManageBooking onAvailabilityChange={handleAvailabilityChange} />
         </Reveal>
         <Reveal>
           <Contact onBook={handleBook} />
