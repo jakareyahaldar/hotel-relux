@@ -49,8 +49,8 @@ export const HOTEL = {
   checkInTime: 'বিকাল ২টা',
   checkOutTime: 'সকাল ১১টা',
   maxGuestsPerRoom: 4,
-  taxRate: 0.15, // ভ্যাট (VAT) — রুম ভাড়ার উপর ১৫%
-  taxLabel: 'ভ্যাট (১৫%)',
+  taxRate: 0, // ভ্যাট (VAT) — ০%
+  taxLabel: 'ভ্যাট (০%)',
 };
 
 export default HOTEL;
