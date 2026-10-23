@@ -48,6 +48,16 @@ export default function RoomDetailsModal({ room, onClose, onBook }) {
           </div>
 
           <p className="room-detail-desc">{room.description}</p>
+          {room.canRentAsNonAc && (
+            <>
+              <span className="room-card__budget-tag room-card__budget-tag--modal">
+                💰 নন-এসি হিসেবেও ভাড়া: {formatPrice(room.nonAcPrice)}/রাত
+              </span>
+              <p className="room-detail-note">
+                এই রুমটি প্রয়োজনে নন-এসি হিসেবেও ভাড়া নেওয়া যায় — নন-এসি ভাড়া {formatPrice(room.nonAcPrice)}/রাত, বাজেট সাশ্রয়ী।
+              </p>
+            </>
+          )}
 
           <div className="room-detail-meta">
             <span>

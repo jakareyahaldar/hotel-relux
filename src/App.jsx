@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import Header from './components/Header.jsx';
+import Notice from './components/Notice.jsx';
 import Hero from './components/Hero.jsx';
 import BookingBar from './components/BookingBar.jsx';
 import Rooms from './components/Rooms.jsx';
@@ -100,6 +101,7 @@ export default function App() {
 
   return (
     <div className="app" data-availability-key={availabilityKey}>
+      <Notice />
       <Header onBook={handleBook} />
 
       <main>

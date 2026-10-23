@@ -30,8 +30,11 @@ export default function Rooms({
 
   const availability = useMemo(() => getAvailability(checkIn, checkOut), [checkIn, checkOut]);
 
-  // A room is listed when it is of the selected type and sleeps the party.
-  const matched = availability.filter((room) => matchesGuestCriteria(room, guests, filter));
+  // When browsing all rooms, show every room regardless of party size so the
+  // full inventory is visible; specific type filters still respect capacity.
+  const matched = availability.filter((room) =>
+    filter === 'all' ? true : matchesGuestCriteria(room, guests, filter),
+  );
   const freeCount = matched.filter((room) => room.available).length;
   const visible = showAll ? matched : matched.slice(0, 6);
 
@@ -137,6 +140,12 @@ export default function Rooms({
                   </span>
                 </div>
 
+                {room.canRentAsNonAc && (
+                  <span className="room-card__budget-tag">
+                    💰 নন-এসি হিসেবেও ভাড়া: {formatPrice(room.nonAcPrice)}/রাত
+                  </span>
+                )}
+
                 <p className="room-card__desc">{room.description}</p>
 
                 <div className="room-card__amenities">
@@ -163,7 +172,7 @@ export default function Rooms({
                   <button
                     type="button"
                     className={`btn ${room.available ? 'btn--primary' : 'btn--ghost'}`}
-                    disabled={!room.available}
+                    disabled={!room.available || room.capacity < guests}
                     onClick={(event) => {
                       event.stopPropagation();
                       onSelectRoom?.(room);

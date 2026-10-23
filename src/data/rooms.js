@@ -1,16 +1,18 @@
 ﻿/**
- * The hotel's complete inventory: 13 rooms across 3 tiers.
+ * The hotel's complete inventory: 13 rooms across 3 floors.
  *
- * ৫টি ক্লাসিক রুম (১০১ - ১০৫)  - বাগান উইং, ২ জন
- * ৫টি ডিলাক্স রুম   (২০১ - ২০৫)  - মূল ভবন, ৩ জন
- * ৩টি সুইট        (৩০১ - ৩০৩)  - উপরের তলা, ৪ জন
+ * ৩য় তলা (৩০১ - ৩০৪)  - মূল ভবন
+ * ৪র্থ তলা (৪০১ - ৪০৪) - মূল ভবন
+ * ৫ম তলা   (৫০১ - ৫০৫) - মূল ভবন
  */
 export const ROOM_TYPES = {
   ac3bed: {
     id: 'ac3bed',
     name: 'এসি ৩ বেড (কাপল+সিংগেল) রুম',
     shortName: 'এসি ৩ বেড',
-    basePrice: 1500,
+    basePrice: 2000,
+    canRentAsNonAc: true,
+    nonAcPrice: 1500,
     capacity: 3,
     bed: 'কাপল + সিংগেল',
     size: '৩০ বর্গ মিটার',
@@ -23,7 +25,9 @@ export const ROOM_TYPES = {
     id: 'accouple',
     name: 'এসি কাপল রুম',
     shortName: 'এসি কাপল',
-    basePrice: 1300,
+    basePrice: 1500,
+    canRentAsNonAc: true,
+    nonAcPrice: 1000,
     capacity: 2,
     bed: '১টি ডাবল বেড',
     size: '২৪ বর্গ মিটার',
@@ -37,6 +41,8 @@ export const ROOM_TYPES = {
     name: 'এসি সিংগেল রুম',
     shortName: 'এসি সিংগেল',
     basePrice: 1000,
+    canRentAsNonAc: true,
+    nonAcPrice: 600,
     capacity: 1,
     bed: '১টি সিংগেল বেড',
     size: '১৮ বর্গ মিটার',
@@ -49,7 +55,7 @@ export const ROOM_TYPES = {
     id: 'nonaccouple',
     name: 'নন এসি কাপল রুম',
     shortName: 'নন এসি কাপল',
-    basePrice: 1000,
+    basePrice: 600,
     capacity: 2,
     bed: '১টি ডাবল বেড',
     size: '২৪ বর্গ মিটার',
@@ -62,7 +68,7 @@ export const ROOM_TYPES = {
     id: 'nonac3bed',
     name: 'নন এসি ৩ বেড রুম',
     shortName: 'নন এসি ৩ বেড',
-    basePrice: 1000,
+    basePrice: 1200,
     capacity: 3,
     bed: '৩টি সিংগেল বেড',
     size: '৩০ বর্গ মিটার',
@@ -75,7 +81,7 @@ export const ROOM_TYPES = {
     id: 'nonacsingle',
     name: 'নন এসি সিংগেল রুম',
     shortName: 'নন এসি সিংগেল',
-    basePrice: 500,
+    basePrice: 400,
     capacity: 1,
     bed: '১টি সিংগেল বেড',
     size: '১৬ বর্গ মিটার',
@@ -87,29 +93,35 @@ export const ROOM_TYPES = {
 };
 
 export const ROOMS = [
-  { id: 'r101', number: '101', type: 'ac3bed', floor: 1, wing: 'মূল ভবন', beds: 'কাপল + সিংগেল', accessible: true },
-  { id: 'r102', number: '102', type: 'ac3bed', floor: 1, wing: 'মূল ভবন', beds: 'কাপল + সিংগেল', accessible: false },
-  { id: 'r103', number: '103', type: 'accouple', floor: 1, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false },
-  { id: 'r104', number: '104', type: 'accouple', floor: 1, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false },
-  { id: 'r105', number: '105', type: 'acsingle', floor: 1, wing: 'মূল ভবন', beds: '১টি সিংগেল বেড', accessible: true },
-  { id: 'r201', number: '201', type: 'acsingle', floor: 2, wing: 'মূল ভবন', beds: '১টি সিংগেল বেড', accessible: true },
-  { id: 'r202', number: '202', type: 'nonaccouple', floor: 2, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false },
-  { id: 'r203', number: '203', type: 'nonaccouple', floor: 2, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false },
-  { id: 'r204', number: '204', type: 'nonac3bed', floor: 2, wing: 'মূল ভবন', beds: '৩টি সিংগেল বেড', accessible: false },
-  { id: 'r205', number: '205', type: 'nonac3bed', floor: 2, wing: 'মূল ভবন', beds: '৩টি সিংগেল বেড', accessible: false },
-  { id: 'r301', number: '301', type: 'nonacsingle', floor: 3, wing: 'উপরের তলা', beds: '১টি সিংগেল বেড', accessible: true },
-  { id: 'r302', number: '302', type: 'nonacsingle', floor: 3, wing: 'উপরের তলা', beds: '১টি সিংগেল বেড', accessible: false },
-  { id: 'r303', number: '303', type: 'nonacsingle', floor: 3, wing: 'উপরের তলা', beds: '১টি সিংগেল বেড', accessible: false },
+  { id: 'r101', number: '301', type: 'nonacsingle', floor: 3, wing: 'মূল ভবন', beds: '১টি সিংগেল বেড', accessible: true, basePrice: 400 },
+  { id: 'r102', number: '302', type: 'ac3bed', floor: 3, wing: 'মূল ভবন', beds: 'কাপল + সিংগেল', accessible: false, basePrice: 2000 },
+  { id: 'r103', number: '303', type: 'accouple', floor: 3, wing: 'মূল ভবন', beds: '২টি বেড', accessible: false, basePrice: 1500 },
+  { id: 'r104', number: '304', type: 'nonaccouple', floor: 3, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600 },
+  { id: 'r201', number: '401', type: 'nonaccouple', floor: 4, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: true, basePrice: 400 },
+  { id: 'r202', number: '402', type: 'ac3bed', floor: 4, wing: 'মূল ভবন', beds: 'কাপল + সিংগেল', accessible: true, basePrice: 2000 },
+  { id: 'r203', number: '403', type: 'nonacsingle', floor: 4, wing: 'মূল ভবন', beds: '১টি সিংগেল বেড', accessible: false, basePrice: 400 },
+  { id: 'r204', number: '404', type: 'accouple', floor: 4, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 1500 },
+  { id: 'r301', number: '501', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: true, basePrice: 600 },
+  { id: 'r302', number: '502', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600 },
+  { id: 'r303', number: '503', type: 'nonacsingle', floor: 5, wing: 'মূল ভবন', beds: '১টি সিংগেল বেড', accessible: false, basePrice: 400 },
+  { id: 'r304', number: '504', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600 },
+  { id: 'r305', number: '505', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600 },
 ];
 
+
 /** Attach the type details (price, amenities, image) onto each room. */
-export const ROOMS_WITH_DETAILS = ROOMS.map((room) => ({
-  ...room,
-  ...ROOM_TYPES[room.type],
-  id: room.id,
-  number: room.number,
-  type: room.type,
-}));
+export const ROOMS_WITH_DETAILS = ROOMS.map((room) => {
+  const typeDetails = ROOM_TYPES[room.type] || {};
+  return {
+    ...typeDetails,
+    ...room,
+    id: room.id,
+    number: room.number,
+    type: room.type,
+    beds: room.beds || typeDetails.bed,
+    basePrice: room.basePrice ?? typeDetails.basePrice,
+  };
+});
 
 export const TOTAL_ROOMS = ROOMS.length;
 
@@ -142,21 +154,21 @@ export const TESTIMONIALS = [
     quote:
       'রাত সাড়ে এগারটায় হোয়াটসঅ্যাপে বুক করেছিলাম, সকালের মধ্যেই রুম পাওয়া গিয়েছিল। পুরোটা কাজ চার-পাঁচ মিনিটের ছিল।',
     name: 'রুবাইয়াত হক',
-    trip: 'ডিলাক্স রুম ২০৩-এ অবস্থান',
+    trip: 'এসি ৩ বেড রুম ৩০২-এ অবস্থান',
   },
   {
     id: 't2',
     quote:
       'মাত্র তেরোটি রুম হওয়ায় কখনো ভিড় লাগে না। কর্মচারীদের সাথে পরিচয় হয়ে যায়, আমার চায়ের পছন্দও তাঁরা মনে রাখে।',
     name: 'তানভীর আহমেদ',
-    trip: 'ক্লাসিক রুম ১০২-এ অবস্থান',
+    trip: 'নন এসি কাপল রুম ৫০১-এ অবস্থান',
   },
   {
     id: 't3',
     quote:
       'সুইটে থাকাটা সত্যিই দারুণ। বৃষ্টির দিনে পুরোটা সময় ঘরেই কাটিয়েছি, বের হতে ইচ্ছাই করেনি।',
     name: 'নুসরাত ও ফারহানা',
-    trip: 'রিল্যাক্স সুইট ৩০১-এ অবস্থান',
+    trip: 'এসি কাপল রুম ৩০৩-এ অবস্থান',
   },
 ];
 
