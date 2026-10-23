@@ -172,7 +172,7 @@ export default function Rooms({
                   <button
                     type="button"
                     className={`btn ${room.available ? 'btn--primary' : 'btn--ghost'}`}
-                    disabled={!room.available || room.capacity < guests}
+                    disabled={!room.available}
                     onClick={(event) => {
                       event.stopPropagation();
                       onSelectRoom?.(room);
