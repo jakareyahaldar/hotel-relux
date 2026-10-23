@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Aurelia Hotel & Suites - a complete React website for a 13-room boutique hotel with room booking, WhatsApp and phone call integration.",
+  "description": "হোটেল রিল্যাক্স আবাসিক — ১৩টি রুমের আবাসিক হোটেলের সম্পূর্ণ রিয়্যাক্ট ওয়েবসাইট, রুম বুকিং, হোয়াটসঅ্যাপ ও ফোন কল ইন্টিগ্রেশনসহ।",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

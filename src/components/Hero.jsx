@@ -17,7 +17,7 @@ export default function Hero({ onBook, onCall, onWhatsApp }) {
           </span>
 
           <h1 className="hero__title">
-            তেরোটি রুম,
+            হোটেল রিল্যাক্স —
             <br />
             <em>নিশ্চিন্ত</em> আবাসের ঠিকানা।
           </h1>
@@ -60,7 +60,7 @@ export default function Hero({ onBook, onCall, onWhatsApp }) {
             </div>
             <div>
               <div className="hero__stat-value">৩০০ গজ</div>
-              <div className="hero__stat-label">শূন্য পয়েন্ট থেকে</div>
+              <div className="hero__stat-label">জিরো পয়েন্ট থেকে</div>
             </div>
           </div>
         </div>

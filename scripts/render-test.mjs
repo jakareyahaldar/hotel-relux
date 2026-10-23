@@ -212,7 +212,7 @@ const CHECKS = [
   { name: 'app root rendered', expression: `!!document.querySelector('.app')` },
   { name: 'header present', expression: `!!document.querySelector('.header')` },
   { name: 'header brand name', expression: `(document.querySelector('.header__brand-name')?.textContent || '').trim().length > 0` },
-  { name: 'hero heading', expression: `(document.querySelector('.hero__title')?.textContent || '').includes('Thirteen rooms')` },
+  { name: 'hero heading', expression: `(document.querySelector('.hero__title')?.textContent || '').includes('নিশ্চিন্ত')` },
   { name: 'hero stats rendered', expression: `document.querySelectorAll('.hero__stat-value').length === 4` },
   { name: 'booking bar present', expression: `!!document.querySelector('.bookbar')` },
   { name: 'booking dates prefilled', expression: `!!document.querySelector('#bar-checkin')?.value && !!document.querySelector('#bar-checkout')?.value` },

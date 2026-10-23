@@ -54,7 +54,7 @@ export default function Rooms({
       <div className="container">
         <div className="section__head">
           <span className="eyebrow">রুমগুলো</span>
-          <h2 className="section__title">তেরোটি রুম, প্রতিটির নিজস্ব দৃশ্য</h2>
+          <h2 className="section__title">আমাদের রুমগুলো</h2>
           <p className="section__lead">
             ইনভেন্টরি ইচ্ছে করে ছোট রাখি, তাই হোটেলে কখনো ভিড় বা তাড়াহুড়ো লাগে না। নিচে তারিখ
             বেছে নিন — গ্রিড ঠিক করে দেখাবে কোন রুম এখন ফাঁকা আছে।
@@ -75,9 +75,8 @@ export default function Rooms({
           <span className="rooms__count">
             {matched.length === 0
               ? 'আপনার অনুসন্ধানে কোনো রুম মেলেনি'
-              : `তারিখ অনুযায়ী ${formatNumber(freeCount)}/${formatNumber(matched.length)} ${
-                  typeLabel ? `${typeLabel} ` : ''
-                }রুম ফাঁকা`}
+              : `তারিখ অনুযায়ী ${formatNumber(freeCount)}/${formatNumber(matched.length)} ${typeLabel ? `${typeLabel} ` : ''
+              }রুম ফাঁকা`}
           </span>
         </div>
 

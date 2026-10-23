@@ -68,7 +68,7 @@ export default function Gallery() {
                 setVisibleCount((count) => Math.min(count + LOAD_STEP, GALLERY.length))
               }
             >
-              আরও ছবি দেখুন (Load more)
+              আরও ছবি দেখুন
             </button>
           </div>
         )}

@@ -1,6 +1,4 @@
-/**
- * Central hotel configuration (কেন্দ্রীয় হোটেল তথ্য)।
- * Change the contact details here and every button across the site updates.
+/** কেন্দ্রীয় হোটেল তথ্য।
  * এখানে নম্বর-ঠিকানা বদলালেই সাইটের সব বোতাম নিজে থেকে আপডেট হয়ে যাবে।
  */
 export const HOTEL = {
@@ -8,28 +6,28 @@ export const HOTEL = {
   shortName: 'হোটেল রিল্যাক্স',
   tagline: 'যশোর রোডে নিশ্চিন্ত আবাস, সুন্দর বিশ্রাম',
   description:
-    'হোটেল রিল্যাক্স আবাসিক — খুলনার শূন্য পয়েন্ট থেকে ৩০০ গজ উত্তরে, বিসমিল্লাহ সুপার মার্কেটের পাশে অবস্থিত একটি পরিবারবান্ধব আবাসিক হোটেল। তেরোটি পরিচ্ছন্ন রুম, ২৪/৭ ফ্রন্ট ডেস্ক ও স্বচ্ছ মূল্যে অবস্থান।',
-  speciality: 'the hotel is protected by cctb 9 cctb',
-  specialty: 'the hotel is protected by cctb 9 cctb',
-  specialities: ['the hotel is protected by cctb 9 cctb'],
-  specialties: ['the hotel is protected by cctb 9 cctb'],
-  features: ['the hotel is protected by cctb 9 cctb'],
-  founded: 2015,
+    'হোটেল রিল্যাক্স আবাসিক — খুলনার জিরো পয়েন্ট থেকে ৩০০ গজ উত্তরে, বিসমিল্লাহ সুপার মার্কেটের পাশে অবস্থিত একটি পরিবারবান্ধব আবাসিক হোটেল। তেরোটি পরিচ্ছন্ন রুম, ২৪/৭ ফ্রন্ট ডেস্ক ও স্বচ্ছ মূল্যে অবস্থান।',
+  speciality: 'হোটেলটি ৯টি সিসিটিভি ক্যামেরা দ্বারা সুরক্ষিত।',
+  specialty: 'হোটেলটি ৯টি সিসিটিভি ক্যামেরা দ্বারা সুরক্ষিত।',
+  specialities: ['হোটেলটি ৯টি সিসিটিভি ক্যামেরা দ্বারা সুরক্ষিত।'],
+  specialties: ['হোটেলটি ৯টি সিসিটিভি ক্যামেরা দ্বারা সুরক্ষিত।'],
+  features: ['হোটেলটি ৯টি সিসিটিভি ক্যামেরা দ্বারা সুরক্ষিত।'],
+  founded: 2024,
 
-  // ---- Contact channels -------------------------------------------------
-  // Bangladesh local format. `phoneRaw` is used for tel: links (E.164).
+  // ---- যোগাযোগের চ্যানেল -------------------------------------------------
+  // বাংলাদেশের স্থানীয় ফরম্যাট। `phoneRaw` টেল: লিংকের জন্য (E.164)।
   phone: '01711737730',
   phoneRaw: '+8801711737730',
   phoneDisplay: '01711-737730',
   phone2: '01711342970',
   phone2Raw: '+8801711342970',
   phone2Display: '01711-342970',
-  // WhatsApp Business number -> digits only, no '+'.
+  // হোয়াটসঅ্যাপ বিজনেস নম্বর -> শুধু সংখ্যা, '+' ছাড়া।
   whatsappNumber: '8801711737730',
   whatsappNumber2: '8801711342970',
   email: 'hotelrelaxresidential@gmail.com',
 
-  // ---- Address ----------------------------------------------------------
+  // ---- ঠিকানা ----------------------------------------------------------
   address: {
     line1: 'বিসমিল্লাহ সুপার মার্কেট',
     line2: 'যশোর রোড, জিরো পয়েন্ট থেকে ৩০০ গজ উত্তরে',
@@ -38,7 +36,7 @@ export const HOTEL = {
     postalCode: '9100',
     country: 'বাংলাদেশ',
   },
-  // Kept in English/Latin so Google Maps can resolve it reliably.
+  // গুগল ম্যাপ যাতে নির্ভরযোগ্যভাবে খুঁজে পায়, তাই ইংরেজি/ল্যাটিনে রাখা।
   mapQuery: 'RG2H+25X Zero Point, Khulna City Bypass, Khulna 9100',
 
   // ---- Booking defaults -------------------------------------------------
@@ -49,7 +47,7 @@ export const HOTEL = {
   checkInTime: 'দুপুর ১২টা',
   checkOutTime: 'সকাল ১১.৩০-১২.০০ টা',
   maxGuestsPerRoom: 4,
-  taxRate: 0, // ভ্যাট (VAT) — ০%
+  taxRate: 0, // ভ্যাট — ০%
   taxLabel: 'ভ্যাট (০%)',
 };
 

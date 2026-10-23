@@ -71,15 +71,15 @@ export default function App() {
     // Nothing matched - explain why instead of opening an unsuitable room.
     const anyFree = getBookableRooms(checkIn, checkOut, { guests: 1, type: 'all' });
     if (anyFree.length === 0) {
-      setToast('No rooms are free for those dates. Please try different dates.');
+      setToast('এই তারিখে কোনো রুম খালি নেই। অন্য তারিখ দিয়ে চেষ্টা করুন।');
       return;
     }
 
     const typeLabel = roomType === 'all' ? null : ROOM_TYPES[roomType]?.shortName;
     setToast(
       typeLabel
-        ? `No ${typeLabel} room sleeps ${guests} guests. Please try another room type.`
-        : `No room sleeps ${guests} guests. Please try another room type or fewer guests.`,
+        ? `${typeLabel} রুমে ${guests} জন অতিথি থাকতে পারে না। অন্য রুমের ধরন বেছে নিন।`
+        : `${guests} জন অতিথির জন্য কোনো রুম নেই। অন্য রুমের ধরন বেছে নিন বা অতিথি কমান।`,
     );
   }, [checkIn, checkOut, guests, roomType]);
 

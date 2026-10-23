@@ -9,11 +9,11 @@
 /** Parse a `YYYY-MM-DD` string into a local Date at midnight. */
 export function parseDate(dateString) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString || '')) {
-    throw new Error(`Invalid date format: ${dateString}`);
+    throw new Error(`তারিখের ফরম্যাট ঠিক নেই: ${dateString}`);
   }
   const [year, month, day] = dateString.split('-').map(Number);
   const date = new Date(year, month - 1, day);
-  if (Number.isNaN(date.getTime())) throw new Error(`Invalid date: ${dateString}`);
+  if (Number.isNaN(date.getTime())) throw new Error(`তারিখটি সঠিক নয়: ${dateString}`);
   return date;
 }
 

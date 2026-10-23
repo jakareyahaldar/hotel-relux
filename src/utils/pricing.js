@@ -9,7 +9,7 @@ import { formatNumber } from './format.js';
  */
 export function calculatePrice({ roomId, checkIn, checkOut, extras = [] }) {
   const room = getRoomById(roomId);
-  if (!room) throw new Error('Unknown room');
+  if (!room) throw new Error('রুমটি পাওয়া যায়নি।');
 
   const nights = Math.max(1, nightsBetween(checkIn, checkOut));
   const roomSubtotal = room.basePrice * nights;
