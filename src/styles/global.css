@@ -2120,7 +2120,6 @@ ul {
 .site-notice__text {
   display: inline-block;
   white-space: nowrap;
-  padding-left: 100%;
   animation: notice-scroll 60s linear infinite;
 }
 @keyframes notice-scroll {
