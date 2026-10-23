@@ -27,27 +27,27 @@ export const HOTEL = {
   // WhatsApp Business number -> digits only, no '+'.
   whatsappNumber: '8801711737730',
   whatsappNumber2: '8801711342970',
-  email: 'hotelrelaxkhulna@gmail.com',
+  email: 'hotelrelaxresidential@gmail.com',
 
   // ---- Address ----------------------------------------------------------
   address: {
     line1: 'বিসমিল্লাহ সুপার মার্কেট',
-    line2: 'যশোর রোড, শূন্য পয়েন্ট থেকে ৩০০ গজ উত্তরে',
+    line2: 'যশোর রোড, জিরো পয়েন্ট থেকে ৩০০ গজ উত্তরে',
     city: 'খুলনা',
     state: 'খুলনা বিভাগ',
     postalCode: '9100',
     country: 'বাংলাদেশ',
   },
   // Kept in English/Latin so Google Maps can resolve it reliably.
-  mapQuery: 'Bismillah Super Market, Jessore Road, Khulna, Bangladesh',
+  mapQuery: 'RG2H+25X Zero Point, Khulna City Bypass, Khulna 9100',
 
   // ---- Booking defaults -------------------------------------------------
   currency: 'BDT',
   currencySymbol: '৳',
   currencyNote: 'সব দাম বাংলাদেশি টাকায় (৳)',
   locale: 'bn-BD',
-  checkInTime: 'বিকাল ২টা',
-  checkOutTime: 'সকাল ১১টা',
+  checkInTime: 'দুপুর ১২টা',
+  checkOutTime: 'সকাল ১১.৩০-১২.০০ টা',
   maxGuestsPerRoom: 4,
   taxRate: 0, // ভ্যাট (VAT) — ০%
   taxLabel: 'ভ্যাট (০%)',

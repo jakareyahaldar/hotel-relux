@@ -10,7 +10,7 @@ import {
 } from './icons.jsx';
 
 export default function Contact({ onBook }) {
-  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(HOTEL.mapQuery)}&output=embed`;
+  const mapSrc = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3678.087395867532!2d89.5283513!3d22.7992253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ff850036869c67%3A0xc647617ff61851d8!2z4Ka54KeL4Kaf4KeH4KayIOCmsOCmv-CmsuCnjeCmr-CmvuCmleCnjeCmuCDgpobgpqzgpr7gprjgpr_gppU!5e0!3m2!1sen!2sbd!4v1792680700853!5m2!1sen!2sbd`;
 
   return (
     <section className="section" id="contact">
