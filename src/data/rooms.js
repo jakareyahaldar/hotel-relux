@@ -93,19 +93,19 @@ export const ROOM_TYPES = {
 };
 
 export const ROOMS = [
-  { id: 'r101', number: '301', type: 'nonacsingle', floor: 3, wing: 'মূল ভবন', beds: '১টি সিংগেল বেড', accessible: true, basePrice: 400 },
-  { id: 'r102', number: '302', type: 'ac3bed', floor: 3, wing: 'মূল ভবন', beds: 'কাপল + সিংগেল', accessible: false, basePrice: 2000 },
-  { id: 'r103', number: '303', type: 'accouple', floor: 3, wing: 'মূল ভবন', beds: '২টি বেড', accessible: false, basePrice: 1500 },
-  { id: 'r104', number: '304', type: 'nonaccouple', floor: 3, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600 },
-  { id: 'r201', number: '401', type: 'nonaccouple', floor: 4, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: true, basePrice: 400 },
-  { id: 'r202', number: '402', type: 'ac3bed', floor: 4, wing: 'মূল ভবন', beds: 'কাপল + সিংগেল', accessible: true, basePrice: 2000 },
-  { id: 'r203', number: '403', type: 'nonacsingle', floor: 4, wing: 'মূল ভবন', beds: '১টি সিংগেল বেড', accessible: false, basePrice: 400 },
-  { id: 'r204', number: '404', type: 'accouple', floor: 4, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 1500 },
-  { id: 'r301', number: '501', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: true, basePrice: 600 },
-  { id: 'r302', number: '502', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600 },
-  { id: 'r303', number: '503', type: 'nonacsingle', floor: 5, wing: 'মূল ভবন', beds: '১টি সিংগেল বেড', accessible: false, basePrice: 400 },
-  { id: 'r304', number: '504', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600 },
-  { id: 'r305', number: '505', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600 },
+  { id: 'r101', number: '301', type: 'nonacsingle', floor: 3, wing: 'মূল ভবন', beds: '১টি সিংগেল বেড', accessible: true, basePrice: 400, image: '/rooms/301.jpg' },
+  { id: 'r102', number: '302', type: 'ac3bed', floor: 3, wing: 'মূল ভবন', beds: 'কাপল + সিংগেল', accessible: false, basePrice: 2000, image: '/rooms/302.jpg' },
+  { id: 'r103', number: '303', type: 'accouple', floor: 3, wing: 'মূল ভবন', beds: '২টি বেড', accessible: false, basePrice: 1500, image: '/rooms/303.jpg' },
+  { id: 'r104', number: '304', type: 'nonaccouple', floor: 3, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600, image: '/rooms/304.jpg' },
+  { id: 'r201', number: '401', type: 'nonaccouple', floor: 4, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: true, basePrice: 400, image: '/rooms/401.jpg' },
+  { id: 'r202', number: '402', type: 'ac3bed', floor: 4, wing: 'মূল ভবন', beds: 'কাপল + সিংগেল', accessible: true, basePrice: 2000, image: '/rooms/402.jpg' },
+  { id: 'r203', number: '403', type: 'nonacsingle', floor: 4, wing: 'মূল ভবন', beds: '১টি সিংগেল বেড', accessible: false, basePrice: 400, image: '/rooms/403.jpg' },
+  { id: 'r204', number: '404', type: 'accouple', floor: 4, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 1500, image: '/rooms/404.jpg' },
+  { id: 'r301', number: '501', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: true, basePrice: 600, image: '/rooms/501.jpg' },
+  { id: 'r302', number: '502', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600, image: '/rooms/502.jpg' },
+  { id: 'r303', number: '503', type: 'nonacsingle', floor: 5, wing: 'মূল ভবন', beds: '১টি সিংগেল বেড', accessible: false, basePrice: 400, image: '/rooms/503.jpg' },
+  { id: 'r304', number: '504', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600, image: '/rooms/504.jpg' },
+  { id: 'r305', number: '505', type: 'nonaccouple', floor: 5, wing: 'মূল ভবন', beds: '১টি ডাবল বেড', accessible: false, basePrice: 600, image: '/rooms/505.jpg' },
 ];
 
 
@@ -140,12 +140,25 @@ export const EXTRA_SERVICES = [
 ];
 
 export const GALLERY = [
-  { id: 'g1', caption: 'ভোরের শীতল রুম', image: '/rooms/room1.png' },
-  { id: 'g2', caption: 'উঠানে সকালের নাশতা', image: '/rooms/room2.png' },
-  { id: 'g3', caption: 'সুইটের বসার কক্ষ', image: '/rooms/room3.png' },
-  { id: 'g4', caption: 'ঝরনো শাওয়ার', image: 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=900&q=80' },
-  { id: 'g5', caption: 'শহরের রাস্তা', image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=900&q=80' },
-  { id: 'g6', caption: 'পড়ার কোণ', image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=900&q=80' },
+  // { id: 'g1', caption: 'ভোরের শীতল রুম', image: '/rooms/room1.png' },
+  // { id: 'g2', caption: 'উঠানে সকালের নাশতা', image: '/rooms/room2.png' },
+  // { id: 'g3', caption: 'সুইটের বসার কক্ষ', image: '/rooms/room3.png' },
+  // { id: 'g4', caption: 'ঝরনো শাওয়ার', image: 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=900&q=80' },
+  // { id: 'g5', caption: 'শহরের রাস্তা', image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=900&q=80' },
+  // { id: 'g6', caption: 'পড়ার কোণ', image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=900&q=80' },
+  { id: 'r301', caption: 'রুম ৩০১', image: '/rooms/301.jpg' },
+  { id: 'r302', caption: 'রুম ৩০২', image: '/rooms/302.jpg' },
+  { id: 'r303', caption: 'রুম ৩০৩', image: '/rooms/303.jpg' },
+  { id: 'r304', caption: 'রুম ৩০৪', image: '/rooms/304.jpg' },
+  { id: 'r401', caption: 'রুম ৪০১', image: '/rooms/401.jpg' },
+  { id: 'r402', caption: 'রুম ৪০২', image: '/rooms/402.jpg' },
+  { id: 'r403', caption: 'রুম ৪০৩', image: '/rooms/403.jpg' },
+  { id: 'r404', caption: 'রুম ৪০৪', image: '/rooms/404.jpg' },
+  { id: 'r501', caption: 'রুম ৫০১', image: '/rooms/501.jpg' },
+  { id: 'r502', caption: 'রুম ৫০২', image: '/rooms/502.jpg' },
+  { id: 'r503', caption: 'রুম ৫০৩', image: '/rooms/503.jpg' },
+  { id: 'r504', caption: 'রুম ৫০৪', image: '/rooms/504.jpg' },
+  { id: 'r505', caption: 'রুম ৫০৫', image: '/rooms/505.jpg' },
 ];
 
 export const TESTIMONIALS = [
