@@ -62,7 +62,7 @@ export const ROOM_TYPES = {
     view: 'শহরের দৃশ্য',
     description: 'নন-এসি দম্পতিদের জন্য আরামদায়ক রুম।',
     amenities: ['ফ্যান', 'ফ্রি ওয়াই-ফাই', 'স্মার্ট টিভি', 'সংযুক্ত বাথরুম'],
-    image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80',
+    image: '/rooms/room3.png',
   },
   nonac3bed: {
     id: 'nonac3bed',
@@ -75,7 +75,7 @@ export const ROOM_TYPES = {
     view: 'শহরের দৃশ্য',
     description: 'নন-এসি তিন বেডের রুম — পরিবার বা বন্ধুদের জন্য আরামদায়ক।',
     amenities: ['ফ্যান', 'ফ্রি ওয়াই-ফাই', 'স্মার্ট টিভি', 'সংযুক্ত বাথরুম'],
-    image: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80',
+    image: '/rooms/room2.png',
   },
   nonacsingle: {
     id: 'nonacsingle',
@@ -88,7 +88,7 @@ export const ROOM_TYPES = {
     view: 'শহরের দৃশ্য',
     description: 'নন-এসি একক অতিথির জন্য সাশ্রয়ী রুম।',
     amenities: ['ফ্যান', 'ফ্রি ওয়াই-ফাই'],
-    image: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80',
+    image: '/rooms/room1.png',
   },
 };
 
@@ -140,9 +140,9 @@ export const EXTRA_SERVICES = [
 ];
 
 export const GALLERY = [
-  { id: 'g1', caption: 'ভোরের শীতল রুম', image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=900&q=80' },
-  { id: 'g2', caption: 'উঠানে সকালের নাশতা', image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=80' },
-  { id: 'g3', caption: 'সুইটের বসার কক্ষ', image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80' },
+  { id: 'g1', caption: 'ভোরের শীতল রুম', image: '/rooms/room1.png' },
+  { id: 'g2', caption: 'উঠানে সকালের নাশতা', image: '/rooms/room2.png' },
+  { id: 'g3', caption: 'সুইটের বসার কক্ষ', image: '/rooms/room3.png' },
   { id: 'g4', caption: 'ঝরনো শাওয়ার', image: 'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?auto=format&fit=crop&w=900&q=80' },
   { id: 'g5', caption: 'শহরের রাস্তা', image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=900&q=80' },
   { id: 'g6', caption: 'পড়ার কোণ', image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=900&q=80' },
