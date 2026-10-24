@@ -74,17 +74,49 @@ export function getAvailability(checkIn, checkOut) {
 }
 
 /**
+ * Normalise a room-type filter value into one of the canonical buckets used
+ * throughout the app: 'all', 'ac', 'nonac', or a specific room type id.
+ *
+ * Accepts the various spellings a caller might use (e.g. 'non-ac', 'non ac',
+ * 'non-ac rooms') so filtering stays robust.
+ */
+export function normalizeRoomTypeFilter(type) {
+  if (type === null || type === undefined || type === '') return 'all';
+  const value = String(type).trim().toLowerCase().replace(/[\\s-]+/g, '');
+  if (value === 'all' || value === 'any' || value === 'allrooms') return 'all';
+  if (value === 'ac' || value === 'acrooms' || value === 'acroom') return 'ac';
+  if (
+    value === 'nonac' ||
+    value === 'nonacrooms' ||
+    value === 'nonacroom' ||
+    value === 'nonaircon'
+  ) {
+    return 'nonac';
+  }
+  return String(type).trim();
+}
+
+/**
  * Does a room suit a party?
  *
  * A room must be big enough for everyone and match the requested type.
- * `type` of 'all' (or a blank value) means "any room type".
+ * `type` may be 'all' (any room), 'ac' (any AC room), 'nonac' (any non-AC
+ * room) or a specific room type id. A blank value means "any room type".
  */
 export function matchesGuestCriteria(room, guests = 1, type = 'all') {
   if (!room) return false;
   const party = Math.max(1, Number(guests) || 1);
   if (room.capacity < party) return false;
-  if (type && type !== 'all' && room.type !== type) return false;
-  return true;
+
+  const filter = normalizeRoomTypeFilter(type);
+  if (filter === 'all') return true;
+
+  const roomType = String(room.type || '').toLowerCase();
+  if (filter === 'ac') return roomType.startsWith('ac');
+  if (filter === 'nonac') return roomType.startsWith('nonac');
+
+  // Specific room type id (or any unrecognised value): exact match.
+  return room.type === type || roomType === String(filter).toLowerCase();
 }
 
 /**
@@ -102,8 +134,12 @@ export function getAvailabilitySummary(checkIn, checkOut) {
   const rooms = getAvailability(checkIn, checkOut);
   const available = rooms.filter((room) => room.available).length;
 
-  const byType = ['classic', 'deluxe', 'suite'].map((typeId) => {
-    const typeRooms = rooms.filter((room) => room.type === typeId);
+  const byType = ['ac', 'nonac'].map((typeId) => {
+    const typeRooms = rooms.filter((room) =>
+      typeId === 'ac'
+        ? String(room.type || '').toLowerCase().startsWith('ac')
+        : String(room.type || '').toLowerCase().startsWith('nonac'),
+    );
     return {
       type: typeId,
       total: typeRooms.length,

@@ -76,7 +76,14 @@ export default function App() {
       return;
     }
 
-    const typeLabel = roomType === 'all' ? null : ROOM_TYPES[roomType]?.shortName;
+    const typeLabel =
+      roomType === 'all'
+        ? null
+        : roomType === 'ac'
+          ? 'এসি'
+          : roomType === 'nonac'
+            ? 'নন-এসি'
+            : ROOM_TYPES[roomType]?.shortName;
     setToast(
       typeLabel
         ? `${typeLabel} রুমে ${guests} জন অতিথি থাকতে পারে না। অন্য রুমের ধরন বেছে নিন।`

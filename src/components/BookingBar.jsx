@@ -1,13 +1,12 @@
 ﻿import { HOTEL } from '../data/hotel.js';
-import { ROOM_TYPES, TOTAL_ROOMS } from '../data/rooms.js';
+import { TOTAL_ROOMS } from '../data/rooms.js';
 import { getAvailabilitySummary } from '../utils/booking.js';
 import { addDays, humanDate, today } from '../utils/dates.js';
 import { formatNumber } from '../utils/format.js';
 
 const TYPE_LABELS = {
-  classic: 'ক্লাসিক',
-  deluxe: 'ডিলাক্স',
-  suite: 'সুইট',
+  ac: 'এসি',
+  nonac: 'নন-এসি',
 };
 
 /**
@@ -90,11 +89,8 @@ export default function BookingBar({
                 onChange={(event) => onChange({ roomType: event.target.value })}
               >
                 <option value="all">যেকোনো রুম</option>
-                {Object.values(ROOM_TYPES).map((type) => (
-                  <option key={type.id} value={type.id}>
-                    {type.name}
-                  </option>
-                ))}
+                <option value="ac">এসি রুম</option>
+                <option value="nonac">নন-এসি রুম</option>
               </select>
             </div>
 

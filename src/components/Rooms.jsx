@@ -1,7 +1,7 @@
 ﻿import { useEffect, useMemo, useState } from 'react';
 import { HOTEL } from '../data/hotel.js';
 import { ROOM_TYPES } from '../data/rooms.js';
-import { getAvailability, matchesGuestCriteria } from '../utils/booking.js';
+import { getAvailability, matchesGuestCriteria, normalizeRoomTypeFilter } from '../utils/booking.js';
 import { formatNumber } from '../utils/format.js';
 import { formatPrice } from '../utils/pricing.js';
 import { IconBed, IconEye, IconRuler, IconUsers } from './icons.jsx';
@@ -9,12 +9,8 @@ import RoomDetailsModal from './RoomDetailsModal.jsx';
 
 const FILTERS = [
   { id: 'all', label: 'সব রুম' },
-  { id: 'ac3bed', label: 'এসি ৩ বেড' },
-  { id: 'accouple', label: 'এসি কাপল' },
-  { id: 'acsingle', label: 'এসি সিংগেল' },
-  { id: 'nonaccouple', label: 'নন এসি কাপল' },
-  { id: 'nonac3bed', label: 'নন এসি ৩ বেড' },
-  { id: 'nonacsingle', label: 'নন এসি সিংগেল' },
+  { id: 'ac', label: 'এসি রুম' },
+  { id: 'nonac', label: 'নন-এসি রুম' },
 ];
 
 export default function Rooms({
@@ -50,7 +46,15 @@ export default function Rooms({
     setShowAll(false);
   }, [filter, guests, checkIn, checkOut]);
 
-  const typeLabel = filter === 'all' ? null : ROOM_TYPES[filter]?.shortName;
+  const normalizedFilter = normalizeRoomTypeFilter(filter);
+  const typeLabel =
+    normalizedFilter === 'all'
+      ? null
+      : normalizedFilter === 'ac'
+        ? 'এসি'
+        : normalizedFilter === 'nonac'
+          ? 'নন-এসি'
+          : ROOM_TYPES[filter]?.shortName;
 
   return (
     <section className="section" id="rooms">
