@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { IconClose } from './icons.jsx';
 
 const NOTICE_TEXT =
@@ -7,6 +7,19 @@ const NOTICE_TEXT =
 const SCROLLING_TEXT = `${NOTICE_TEXT}  ★  ${NOTICE_TEXT}   ★   ${NOTICE_TEXT}`;
 
 export default function Notice({ open = false, onClose }) {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 900px)').matches : false
+  );
+
+  // Keep mobile detection in sync with viewport changes.
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+    const mq = window.matchMedia('(max-width: 900px)');
+    const handler = (event) => setIsMobile(event.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
   // Lock body scroll while the popup is open.
   useEffect(() => {
     if (!open) return undefined;
@@ -23,13 +36,15 @@ export default function Notice({ open = false, onClose }) {
 
   return (
     <>
-      {/* Desktop top notice bar. Hidden on mobile via CSS. */}
-      <div className="site-notice" role="alert">
-        <span className="site-notice__icon" aria-hidden="true">⚠️</span>
-        <span className="site-notice__track">
-          <span className="site-notice__text">{SCROLLING_TEXT}</span>
-        </span>
-      </div>
+      {/* Desktop top notice bar. Hidden on mobile via CSS/JS. */}
+      {!isMobile && (
+        <div className="site-notice" role="alert">
+          <span className="site-notice__icon" aria-hidden="true">⚠️</span>
+          <span className="site-notice__track">
+            <span className="site-notice__text">{SCROLLING_TEXT}</span>
+          </span>
+        </div>
+      )}
 
       {/* Mobile / on-demand popup notice. */}
       {open && (
