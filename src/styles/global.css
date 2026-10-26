@@ -1253,6 +1253,11 @@ ul {
   .gallery__item:nth-child(4) {
     grid-column: span 1;
   }
+
+  /* Hide the scrolling top notice on mobile/tablet devices. */
+  .site-notice {
+    display: none;
+  }
 }
 
 @media (max-width: 720px) {

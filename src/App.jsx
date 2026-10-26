@@ -32,7 +32,7 @@ export default function App() {
   // minutes so it does not pop up again for the same visitor.
   useEffect(() => {
     if (typeof window === 'undefined') return undefined;
-    const isMobile = window.matchMedia('(max-width: 720px)').matches;
+    const isMobile = window.matchMedia('(max-width: 900px)').matches;
     if (!isMobile) return undefined;
     const STORAGE_KEY = 'hotelRelaxNoticeShownAt';
     const THIRTY_MINUTES = 30 * 60 * 1000;
