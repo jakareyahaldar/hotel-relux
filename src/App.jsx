@@ -149,7 +149,7 @@ export default function App() {
       <Header onBook={handleBook} />
 
       <main>
-        <Hero onBook={handleSearch} onCall={() => {}} onWhatsApp={() => {}} onNotice={handleOpenNotice} />
+        <Hero onBook={handleSearch} onCall={() => {}} onWhatsApp={() => {}} />
 
         <BookingBar
           checkIn={checkIn}
