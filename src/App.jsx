@@ -180,7 +180,7 @@ export default function App() {
 
       <Footer onBook={handleBook} />
 
-      <FloatingActions />
+      <FloatingActions onNotice={handleOpenNotice} />
 
       {selectedRoom && (
         <BookingModal

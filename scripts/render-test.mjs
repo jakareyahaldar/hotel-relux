@@ -226,7 +226,7 @@ const CHECKS = [
   { name: 'the "all rooms" chip starts active', expression: `(() => { const chip = [...document.querySelectorAll('.filter-chip')].find((b) => b.textContent.trim() === 'All rooms'); return !!chip && chip.classList.contains('filter-chip--active'); })()` },
   { name: 'footer present', expression: `!!document.querySelector('.footer')` },
   { name: 'footer contact links', expression: `document.querySelectorAll('.footer__contact-item').length >= 3` },
-  { name: 'floating action buttons', expression: `document.querySelectorAll('.fab-stack .fab').length === 2` },
+  { name: 'floating action buttons', expression: `document.querySelectorAll('.fab-stack .fab').length === 3` },
   { name: 'stylesheet applied', expression: `getComputedStyle(document.body).margin === '0px'` },
   { name: 'no horizontal overflow', expression: `document.documentElement.scrollWidth <= window.innerWidth + 1` },
 ];
