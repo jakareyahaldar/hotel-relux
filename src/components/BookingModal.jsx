@@ -145,6 +145,18 @@ export default function BookingModal({ room, checkIn, checkOut, guests = 1, onCl
     }
   };
 
+  if (step === 'confirmed') {
+    return (
+      <BookingConfirmation
+        booking={booking}
+        message={booking?.whatsappMessage}
+        checkIn={checkIn}
+        checkOut={effectiveCheckOut}
+        onClose={onClose}
+      />
+    );
+  }
+
   return (
     <div
       className="modal-backdrop"

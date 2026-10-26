@@ -47,13 +47,6 @@ export function createBooking(payload) {
 
   const price = calculatePrice({ roomId, checkIn, checkOut, extras });
 
-  // Availability re-check (double booking protection).
-  if (occupiedRoomIds(checkIn, checkOut).has(roomId)) {
-    const error = new Error('দুঃখিত, এই তারিখে রুমটি ইতিমধ্যে বুক হয়ে গেছে। অন্য একটি রুম বেছে নিন।');
-    error.status = 409;
-    throw error;
-  }
-
   const booking = {
     status: 'pending',
     roomId,

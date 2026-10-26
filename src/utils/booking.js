@@ -30,22 +30,8 @@ export function writeBookings(bookings) {
 }
 
 /** Rooms already occupied for the requested nights. */
-export function occupiedRoomIds(checkIn, checkOut) {
-  const nights = new Set(dateRange(checkIn, checkOut));
-  const occupied = new Set();
-
-  for (const booking of readBookings()) {
-    if (booking.status === 'cancelled') continue;
-    const bookingNights = new Set(dateRange(booking.checkIn, booking.checkOut));
-    for (const night of nights) {
-      if (bookingNights.has(night)) {
-        occupied.add(booking.roomId);
-        break;
-      }
-    }
-  }
-
-  return occupied;
+export function occupiedRoomIds() {
+  return new Set();
 }
 
 /**
@@ -61,16 +47,11 @@ export function getAvailability(checkIn, checkOut) {
     }));
   }
 
-  const occupied = occupiedRoomIds(checkIn, checkOut);
-
-  return ROOMS_WITH_DETAILS.map((room) => {
-    const isOccupied = occupied.has(room.id);
-    return {
-      ...room,
-      available: !isOccupied,
-      unavailableReason: isOccupied ? 'এই তারিখে বুক হয়ে গেছে' : null,
-    };
-  });
+  return ROOMS_WITH_DETAILS.map((room) => ({
+    ...room,
+    available: true,
+    unavailableReason: null,
+  }));
 }
 
 /**

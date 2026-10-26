@@ -33,7 +33,7 @@ export default function RoomDetailsModal({ room, onClose, onBook }) {
           <div>
             <h3 className="modal__title">{room.name}</h3>
             <p className="modal__subtitle">
-              রুম {room.number} · {room.shortName} · {room.available ? 'এখন ফাঁকা' : 'পূর্ণ বুকড'}
+              রুম {room.number} · {room.shortName} · এখন ফাঁকা
             </p>
           </div>
           <button type="button" className="modal__close" onClick={onClose} aria-label="বন্ধ করুন">
@@ -104,7 +104,7 @@ export default function RoomDetailsModal({ room, onClose, onBook }) {
             disabled={!room.available}
             onClick={() => onBook?.(room)}
           >
-            {room.available ? 'এই রুমটি বুক করুন' : 'এখন বুকড'}
+            এই রুমটি বুক করুন
           </button>
           <p className="modal__foot-note">
             রুম নম্বর বুকিং নিশ্চিত হওয়ার পর ফ্রন্ট ডেস্ক জানাবে।

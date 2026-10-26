@@ -113,12 +113,6 @@ export default function BookingBar({
                   {TYPE_LABELS[type.type]}: {formatNumber(type.available)}/{formatNumber(type.total)}
                 </span>
               ))}
-              {summary.availableRooms === 0 && (
-                <span className="pill pill--full">
-                  <span className="pill__dot" />
-                  এই তারিখে সম্পূর্ণ বুকড
-                </span>
-              )}
             </div>
           ) : (
             <div className="bookbar__availability">

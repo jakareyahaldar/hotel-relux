@@ -122,7 +122,6 @@ export default function Rooms({
                 <img src={room.image} alt={`${room.name} - ${room.view}`} loading="lazy" />
                 <span className="room-card__tag">{room.shortName}</span>
                 <span className="room-card__number">রুম {room.number}</span>
-                {!room.available && <span className="room-card__sold">পূর্ণ বুকড</span>}
               </div>
 
               <div className="room-card__body">
@@ -181,7 +180,7 @@ export default function Rooms({
                       onSelectRoom?.(room);
                     }}
                   >
-                    {room.available ? 'এই রুমটি বুক করুন' : 'বুকড'}
+                    এই রুমটি বুক করুন
                   </button>
                 </div>
               </div>
