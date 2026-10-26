@@ -26,6 +26,10 @@ export default function App() {
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [toast, setToast] = useState('');
   const [noticeOpen, setNoticeOpen] = useState(false);
+  const [noticeSeen, setNoticeSeen] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.localStorage.getItem('hotelRelaxNoticeSeen') === '1';
+  });
 
   // On mobile devices the top notice bar is hidden, so show the notice as a
   // popup the first time a visitor lands. Remember the show time for 30
@@ -40,7 +44,9 @@ export default function App() {
     const now = Date.now();
     if (!lastShown || now - lastShown > THIRTY_MINUTES) {
       setNoticeOpen(true);
+      setNoticeSeen(true);
       window.localStorage.setItem(STORAGE_KEY, String(now));
+      window.localStorage.setItem('hotelRelaxNoticeSeen', '1');
     }
     return undefined;
   }, []);
@@ -121,6 +127,10 @@ export default function App() {
   }, []);
 
   const handleOpenNotice = useCallback(() => {
+    setNoticeSeen(true);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('hotelRelaxNoticeSeen', '1');
+    }
     setNoticeOpen(true);
   }, []);
 
@@ -180,7 +190,7 @@ export default function App() {
 
       <Footer onBook={handleBook} />
 
-      <FloatingActions onNotice={handleOpenNotice} />
+      <FloatingActions onNotice={handleOpenNotice} hasNewNotice={!noticeSeen} />
 
       {selectedRoom && (
         <BookingModal

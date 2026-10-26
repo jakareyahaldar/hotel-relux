@@ -6,23 +6,10 @@ import { IconAlert, IconPhone, IconWhatsApp } from './icons.jsx';
 /**
  * Floating WhatsApp, phone and notice buttons.
  * These stay visible on every screen so a guest can always reach the hotel
- * with one tap. The notice button carries a "NEW" badge until it has been
- * opened at least once.
+ * with one tap. The notice button carries a "NEW" badge until the notice
+ * has been opened at least once.
  */
-export default function FloatingActions({ onNotice }) {
-  const [hasNewNotice, setHasNewNotice] = useState(() => {
-    if (typeof window === 'undefined') return true;
-    return window.localStorage.getItem('hotelRelaxNoticeSeen') !== '1';
-  });
-
-  const openNotice = () => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('hotelRelaxNoticeSeen', '1');
-    }
-    setHasNewNotice(false);
-    onNotice?.();
-  };
-
+export default function FloatingActions({ onNotice, hasNewNotice = false }) {
   return (
     <div className="fab-stack">
       <a
@@ -48,7 +35,7 @@ export default function FloatingActions({ onNotice }) {
       <button
         type="button"
         className="fab fab--notice"
-        onClick={openNotice}
+        onClick={onNotice}
         aria-label="নোটিশ দেখুন"
       >
         <IconAlert size={20} className="fab__icon" />
