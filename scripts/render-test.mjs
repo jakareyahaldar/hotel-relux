@@ -221,9 +221,9 @@ const CHECKS = [
   { name: 'availability pill rendered', expression: `!!document.querySelector('.bookbar__availability .pill')` },
   { name: 'rooms section present', expression: `!!document.querySelector('#rooms')` },
   { name: 'room cards rendered', expression: `document.querySelectorAll('.room-card').length > 0` },
-  { name: 'rooms availability counter rendered', expression: `(document.querySelector('.rooms__count')?.textContent || '').includes('13 of 13')` },
-  { name: 'room type filter chips rendered', expression: `document.querySelectorAll('.rooms__filters .filter-chip').length === 4` },
-  { name: 'the "all rooms" chip starts active', expression: `(() => { const chip = [...document.querySelectorAll('.filter-chip')].find((b) => b.textContent.trim() === 'All rooms'); return !!chip && chip.classList.contains('filter-chip--active'); })()` },
+  { name: 'rooms availability counter rendered', expression: `(document.querySelector('.rooms__count')?.textContent || '').includes('১৩/১৩')` },
+  { name: 'room type filter chips rendered', expression: `document.querySelectorAll('.rooms__filters .filter-chip').length === 3` },
+  { name: 'the "all rooms" chip starts active', expression: `(() => { const chip = [...document.querySelectorAll('.filter-chip')].find((b) => b.textContent.trim() === 'সব রুম'); return !!chip && chip.classList.contains('filter-chip--active'); })()` },
   { name: 'footer present', expression: `!!document.querySelector('.footer')` },
   { name: 'footer contact links', expression: `document.querySelectorAll('.footer__contact-item').length >= 3` },
   { name: 'floating action buttons', expression: `document.querySelectorAll('.fab-stack .fab').length === 3` },
@@ -241,7 +241,7 @@ const BOOKING_STEPS = [
     name: 'header "Book a room" button is visible',
     expression: `(() => {
       const b = [...document.querySelectorAll('button')].find(
-        (x) => x.textContent.trim() === 'Book a room' && x.closest('.header'),
+        (x) => x.textContent.trim() === 'রুম বুক করুন' && x.closest('.header'),
       );
       if (!b) return false;
       const r = b.getBoundingClientRect();
@@ -253,7 +253,7 @@ const BOOKING_STEPS = [
     name: 'clicking "Book a room" opens the booking modal',
     expression: `(() => {
       const b = [...document.querySelectorAll('button')].find(
-        (x) => x.textContent.trim() === 'Book a room' && x.closest('.header'),
+        (x) => x.textContent.trim() === 'রুম বুক করুন' && x.closest('.header'),
       );
       if (!b) return false;
       b.click();
@@ -327,7 +327,7 @@ const BOOKING_STEPS = [
     name: 'booking is persisted to localStorage',
     expression: `(() => {
       try {
-        const list = JSON.parse(localStorage.getItem('aurelia.bookings.v1') || '[]');
+        const list = JSON.parse(localStorage.getItem('relax.bookings.v1') || '[]');
         return Array.isArray(list) && list.length > 0 && list[0].status === 'pending';
       } catch {
         return false;
