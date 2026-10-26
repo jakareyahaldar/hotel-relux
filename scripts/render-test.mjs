@@ -316,7 +316,6 @@ const BOOKING_STEPS = [
     })()`,
     settle: 900,
   },
-  },
   {
     name: 'confirmation WhatsApp link carries the booking message',
     expression: `(() => {

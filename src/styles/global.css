@@ -1256,6 +1256,10 @@ ul {
 }
 
 @media (max-width: 720px) {
+  .site-notice {
+    display: none;
+  }
+
   .container {
     padding: 0 18px;
   }
@@ -2156,4 +2160,44 @@ ul {
   50% {
     transform: scale(1.25);
   }
+}
+
+
+/* --- Hero notice trigger -------------------------------------------------- */
+.hero__notice-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(227, 199, 102, 0.45);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--gold-light);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all var(--transition);
+  width: fit-content;
+}
+
+.hero__notice-btn:hover {
+  background: rgba(227, 199, 102, 0.18);
+  color: var(--white);
+  border-color: var(--gold-light);
+  transform: translateY(-1px);
+}
+
+/* --- Notice popup --------------------------------------------------------- */
+.notice-popup {
+  max-width: 520px;
+}
+
+.notice-popup__text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink);
+  margin: 0;
 }

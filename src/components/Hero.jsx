@@ -3,7 +3,7 @@ import { TOTAL_ROOMS } from '../data/rooms.js';
 import { formatNumber } from '../utils/format.js';
 import { IconArrowRight, IconPhone, IconWhatsApp } from './icons.jsx';
 
-export default function Hero({ onBook, onCall, onWhatsApp }) {
+export default function Hero({ onBook, onCall, onWhatsApp, onNotice }) {
   return (
     <section className="hero" id="top">
       <div className="hero__bg" />
@@ -15,6 +15,16 @@ export default function Hero({ onBook, onCall, onWhatsApp }) {
             <span className="pill__dot" />
             {HOTEL.founded} · যশোর রোড, খুলনা
           </span>
+
+          <button
+            type="button"
+            className="hero__notice-btn"
+            onClick={onNotice}
+            aria-label="নোটিশ দেখুন"
+          >
+            <span aria-hidden="true">⚠️</span>
+            <span>নোটিশ</span>
+          </button>
 
           <h1 className="hero__title">
             হোটেল রিল্যাক্স —

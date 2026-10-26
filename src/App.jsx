@@ -25,6 +25,25 @@ export default function App() {
   const [roomType, setRoomType] = useState('all');
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [toast, setToast] = useState('');
+  const [noticeOpen, setNoticeOpen] = useState(false);
+
+  // On mobile devices the top notice bar is hidden, so show the notice as a
+  // popup the first time a visitor lands. Remember the show time for 30
+  // minutes so it does not pop up again for the same visitor.
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+    const isMobile = window.matchMedia('(max-width: 720px)').matches;
+    if (!isMobile) return undefined;
+    const STORAGE_KEY = 'hotelRelaxNoticeShownAt';
+    const THIRTY_MINUTES = 30 * 60 * 1000;
+    const lastShown = Number(window.localStorage.getItem(STORAGE_KEY) || 0);
+    const now = Date.now();
+    if (!lastShown || now - lastShown > THIRTY_MINUTES) {
+      setNoticeOpen(true);
+      window.localStorage.setItem(STORAGE_KEY, String(now));
+    }
+    return undefined;
+  }, []);
 
   // Toast auto-dismiss.
   useEffect(() => {
@@ -101,6 +120,14 @@ export default function App() {
     setAvailabilityKey((key) => key + 1);
   }, []);
 
+  const handleOpenNotice = useCallback(() => {
+    setNoticeOpen(true);
+  }, []);
+
+  const handleCloseNotice = useCallback(() => {
+    setNoticeOpen(false);
+  }, []);
+
   const handleCloseModal = useCallback(() => {
     setSelectedRoom(null);
     setAvailabilityKey((key) => key + 1);
@@ -108,11 +135,11 @@ export default function App() {
 
   return (
     <div className="app" data-availability-key={availabilityKey}>
-      <Notice />
+      <Notice open={noticeOpen} onClose={handleCloseNotice} />
       <Header onBook={handleBook} />
 
       <main>
-        <Hero onBook={handleSearch} onCall={() => {}} onWhatsApp={() => {}} />
+        <Hero onBook={handleSearch} onCall={() => {}} onWhatsApp={() => {}} onNotice={handleOpenNotice} />
 
         <BookingBar
           checkIn={checkIn}
